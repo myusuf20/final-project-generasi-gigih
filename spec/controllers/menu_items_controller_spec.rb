@@ -4,11 +4,11 @@ RSpec.describe MenuItemsController do
   describe 'GET #index' do
     context 'with params[:letter]' do
       it "populates an array of menu items starting with the letter" do
-        telur_dadar = create(:menu_item, name: "Telur Dadar")
-        telur_ceplok = create(:menu_item, name: "Telur Ceplok")
+        telur_dadar = create(:menu_item, name: 'Telur Dadar')
         get :index, params: { letter: 'T' }
         expect(assigns(:menu_items)).to match_array([telur_dadar])
       end
+
       it "renders the :index template" do
         get :index, params: { letter: 'T' }
         expect(response).to render_template :index
@@ -18,10 +18,11 @@ RSpec.describe MenuItemsController do
     context 'without params[:letter]' do
       it "populates an array of all menu items" do
         telur_dadar = create(:menu_item, name: "Telur Dadar")
-        telur_ceplok = create(:menu_item, name: "Telur Ceplok")
+        ceplok_telur = create(:menu_item, name: "Telur Ceplok")
         get :index
-        expect(assigns(:menu_items)).to match_array([telur_dadar, telur_ceplok])
+        expect(assigns(:menu_items)).to match_array([telur_dadar, ceplok_telur])
       end
+
       it "renders the :index template" do
         get :index
         expect(response).to render_template :index
@@ -33,7 +34,7 @@ RSpec.describe MenuItemsController do
     it "assigns the requested menu_item to @menu_item" do
       menu_item = create(:menu_item)
       get :show, params: { id: menu_item }
-      expect(assigns(:menu_item)).to eq @menu_item
+      expect(assigns(:menu_item)).to eq menu_item
     end
     it "renders the :show template" do
       menu_item = create(:menu_item)
@@ -132,15 +133,15 @@ RSpec.describe MenuItemsController do
       @menu_item = create(:menu_item)
     end
 
-    it "deletes the food from the database" do
+    it "deletes the menu item from the database" do
       expect{
         delete :destroy, params: { id: @menu_item }
       }.to change(MenuItem, :count).by(-1)
     end
 
-    it "redirects to foods#index" do
+    it "redirects to menu_items#index" do
       delete :destroy, params: { id: @menu_item }
-      expect(response).to redirect_to menu_item_url
+      expect(response).to redirect_to menu_items_url
     end
   end
 end
