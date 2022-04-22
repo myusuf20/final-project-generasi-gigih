@@ -21,5 +21,8 @@ RSpec.describe "menu_items/index", type: :view do
     assert_select "tr>td", mame: "Semur".to_s, count: 2
     assert_select "tr>td", description: "MyText".to_s, count: 2
     assert_select "tr>td", price: 2.to_s, count: 2
+    assert_select "tr>td", mame: "Rendang".to_s, count: 2
+    assert_select "tr>td", description: "MyText".to_s, count: 2
+    assert_select "tr>td", price: 2.to_s, count: 2
   end
 end
