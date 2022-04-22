@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_04_22_150447) do
+ActiveRecord::Schema.define(version: 2022_04_22_162804) do
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -26,12 +26,12 @@ ActiveRecord::Schema.define(version: 2022_04_22_150447) do
   end
 
   create_table "menu_categories", force: :cascade do |t|
-    t.integer "item_id"
+    t.integer "menu_item_id"
     t.integer "category_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["category_id"], name: "index_menu_categories_on_category_id"
-    t.index ["item_id"], name: "index_menu_categories_on_item_id"
+    t.index ["menu_item_id"], name: "index_menu_categories_on_menu_item_id"
   end
 
   create_table "menu_items", force: :cascade do |t|
@@ -42,14 +42,14 @@ ActiveRecord::Schema.define(version: 2022_04_22_150447) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "order_details", primary_key: ["order_id", "item_id"], force: :cascade do |t|
+  create_table "order_details", primary_key: ["order_id", "menu_item_id"], force: :cascade do |t|
     t.integer "order_id"
-    t.integer "item_id"
+    t.integer "menu_item_id"
     t.integer "quantity"
     t.float "price"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["item_id"], name: "index_order_details_on_item_id"
+    t.index ["menu_item_id"], name: "index_order_details_on_menu_item_id"
     t.index ["order_id"], name: "index_order_details_on_order_id"
   end
 
@@ -64,8 +64,8 @@ ActiveRecord::Schema.define(version: 2022_04_22_150447) do
   end
 
   add_foreign_key "menu_categories", "categories"
-  add_foreign_key "menu_categories", "items"
-  add_foreign_key "order_details", "items"
+  add_foreign_key "menu_categories", "menu_items"
+  add_foreign_key "order_details", "menu_items"
   add_foreign_key "order_details", "orders"
   add_foreign_key "orders", "customers"
 end
