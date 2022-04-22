@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :customer do
-    nama { "MyString" }
+    name { "MyString" }
     email { "MyString" }
   end
 end
