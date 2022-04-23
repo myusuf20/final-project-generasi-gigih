@@ -1,4 +1,6 @@
 class MenuItem < ApplicationRecord
+  has_and_belongs_to_many :customers
+  has_many :order_details
   validates :name, presence: true, uniqueness: true
   validates :price, presence: true, comparison: { greater_than_or_equal_to: 0.01 }
   validates :description, length: { maximum: 150 }

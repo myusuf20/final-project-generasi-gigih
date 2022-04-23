@@ -7,5 +7,6 @@ class EmailValidator < ActiveModel::EachValidator
 end
 
 class Customer < ApplicationRecord
+  has_many :orders
   validates :email, presence: true, email: true
 end

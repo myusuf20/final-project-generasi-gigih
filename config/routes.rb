@@ -12,4 +12,5 @@ Rails.application.routes.draw do
   # get 'menu_items/destroy'
 
   resources :menu_items
+  resources :orders
 end
