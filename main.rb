@@ -1,1 +1,3 @@
-puts "Hello, World!"
+def index
+  @items = Item.all
+end
